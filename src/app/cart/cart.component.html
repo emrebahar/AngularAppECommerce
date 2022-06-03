@@ -1,0 +1,61 @@
+<div class="col mt-3">
+  <h4 class="page-header">Sepetim</h4>
+</div>
+
+<table
+  class="table"
+  *ngIf="cartList && cartList.length; else cartEmptyAlertTemplate"
+>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ProductName</th>
+      <th scope="col">Unit Price</th>
+      <th scope="col">Quantity Per Unit</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Total</th>
+      <th scope="col">Total KDV</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let cart of cartList; let i = index">
+      <tr>
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ cart.product.productName | uppercase }}</td>
+        <td>{{ cart.product.unitPrice | currency: "₺" }}</td>
+        <td>{{ cart.product.quantityPerUnit }}</td>
+        <td>{{ cart.count }}</td>
+        <td>{{ getTotal(cart) | currency: "₺" }}</td>
+        <td>{{ getTotalKdv(cart) | currency: "₺" }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            (click)="removeFromCart(cart, _removeType.single)"
+          >
+            Sil
+          </button>
+          <button
+            type="button"
+            class="btn btn-warning btn-sm ms-3"
+            (click)="removeFromCart(cart, _removeType.multiple)"
+          >
+            Tümünü Sil
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf="cartList && cartList.length">
+      <button type="button" class="btn btn-warning btn-sm mt-3">
+        Sepeti Temizle
+      </button>
+    </ng-container>
+  </tbody>
+</table>
+
+<ng-template #cartEmptyAlertTemplate>
+  <div class="alert alert-warning" role="alert">
+    Sepetinizde ürün bulunmamaktadır!
+  </div>
+</ng-template>

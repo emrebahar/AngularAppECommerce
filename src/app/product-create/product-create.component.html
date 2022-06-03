@@ -1,0 +1,94 @@
+<div class="col mt-3">
+  <h4 class="page-header">Yeni Ürün Ekle</h4>
+</div>
+
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-6">
+      <div class="mb-3">
+        <label for="category" class="form-label">Ürün Kategorisi</label>
+        <input
+          formControlName="category"
+          type="text"
+          class="form-control"
+          id="category"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="productName" class="form-label">Ürün Adı</label>
+        <input
+          formControlName="productName"
+          type="text"
+          class="form-control"
+          id="productName"
+          [ngClass]="{
+            'is-invalid': f['productName'].invalid && f['productName'].dirty,
+            'is-valid': f['productName'].valid
+          }"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="quantityPerUnit" class="form-label">Ürün Açıklama</label>
+        <input
+          formControlName="quantityPerUnit"
+          type="text"
+          class="form-control"
+          id="quantityPerUnit"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="unitPrice" class="form-label">Fiyatı</label>
+        <input
+          formControlName="unitPrice"
+          type="number"
+          class="form-control"
+          id="unitPrice"
+        />
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="mb-3">
+        <label for="category" class="form-label">Ürün Kategorisi</label><br />
+        <label for="category" class="form-label">
+          {{ form.controls.category.value }} -
+          {{ form.get("category").value }} - {{ f.category.value }}
+        </label>
+      </div>
+      <div class="mb-3">
+        <label for="productName" class="form-label">Ürün Adı</label><br />
+        <label for="productName" class="form-label">
+          {{ form.controls.productName.value }} -
+          {{ form.get("productName").value }} - {{ f.productName.value }}
+        </label>
+      </div>
+      <div class="mb-3">
+        <label for="quantityPerUnit" class="form-label">Ürün Açıklama</label
+        ><br />
+        <label for="quantityPerUnit" class="form-label">
+          {{ form.controls.quantityPerUnit.value }} -
+          {{ form.get("quantityPerUnit").value }} -
+          {{ f.quantityPerUnit.value }}
+        </label>
+      </div>
+      <div class="mb-3">
+        <label for="unitPrice" class="form-label">Fiyatı</label><br />
+        <label for="unitPrice" class="form-label">
+          {{ form.controls.unitPrice.value }} -
+          {{ form.get("unitPrice").value }} - {{ f.unitPrice.value }}
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="onSave()"
+        [disabled]="form.invalid"
+      >
+        Kaydet
+      </button>
+    </div>
+  </div>
+</form>

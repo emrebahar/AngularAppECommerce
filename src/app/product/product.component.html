@@ -1,0 +1,43 @@
+<div class="col mt-3">
+  <h4 class="page-header">Ürünler</h4>
+</div>
+
+<ng-container *ngIf="addedProduct">
+  <div class="alert alert-danger mt-3" role="alert">
+    {{ addedProduct }} Sepete Eklendi!!
+  </div>
+</ng-container>
+
+<div class="col mt-3">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Arama Yapın..."
+    [(ngModel)]="filteredText"
+  />
+</div>
+<ng-container *ngIf="filteredText">
+  <b> {{ filteredText }} </b>için arama yaptınız.
+</ng-container>
+
+<ul class="list-group mt-3">
+  <ng-container
+    *ngFor="let product of productList | filter: 'productName':filteredText"
+  >
+    <li class="list-group-item">
+      <button class="btn btn-success float-end" (click)="addToCart(product)">
+        Sepete Ekle
+      </button>
+      <h5>
+        <b>{{ product.productName | uppercase }}</b>
+      </h5>
+      <p>{{ product.quantityPerUnit }}</p>
+      <h6>
+        {{ product.unitPrice | currency: "₺" }}
+      </h6>
+      <h6>
+        <b>KDV'li tutar: {{ product.unitPrice | kdv: 100 | currency: "₺" }}</b>
+      </h6>
+    </li>
+  </ng-container>
+</ul>
